@@ -10,6 +10,8 @@ class App extends React.Component {
     this.handleKey = this.handleKey.bind(this)
     this.handleButton = this.handleButton.bind(this)
     this.handleUp = this.handleUp.bind(this)
+    this.handleTouch = this.handleTouch.bind(this)
+    this.handleTouchEnd = this.handleTouchEnd.bind(this)
   }
 
   // handle keyboard presses
@@ -32,6 +34,16 @@ class App extends React.Component {
   }
 
   handleUp(e) {
+    this.deactivate(e.target)
+  }
+
+  handleTouch(e) {
+    e.preventDefault()
+    this.playDrum(e.target)
+  }
+
+  handleTouchEnd(e) {
+    e.preventDefault()
     this.deactivate(e.target)
   }
 
@@ -58,10 +70,14 @@ class App extends React.Component {
   }
 
   render() {
-    const buttons = this.props.drums.map(drum => <DrumPad onClick={this.handleButton} onUp={this.handleUp} name={drum.name} key={drum.key} keyCode={drum.keyCode} letter={drum.key} path={drum.path}/>)
+  const buttons = this.props.drums.map(drum => {
+    return (<DrumPad onClick={this.handleButton} onUp={this.handleUp} name={drum.name} 
+      key={drum.key} keyCode={drum.keyCode} letter={drum.key} 
+      path={drum.path} onTouch={this.handleTouch} onEnd={this.handleTouchEnd}/>
+    )})
     return (
       <div id="drum-machine">
-        <h1>Drum Machine</h1>
+        <h1>DRUMINATOR 3000</h1>
         <div id="display">{this.state.playing}</div>
         <div className="pad-container">
           {buttons}
