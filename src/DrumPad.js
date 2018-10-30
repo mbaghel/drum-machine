@@ -2,7 +2,9 @@ import React from 'react';
 
 const DrumPad = function(props) {
   return (
-    <button className="drum-pad" id={props.name} data-keycode={props.keyCode} onMouseDown={props.onClick} onMouseUp={props.onUp} onMouseLeave={props.onUp} >
+    <button className="drum-pad" id={props.name} data-keycode={props.keyCode} 
+      onMouseDown={props.onClick} onMouseUp={props.onUp} onMouseLeave={props.onUp} 
+      onTouchStart={props.onTouch} onTouchEnd={props.onEnd}>
       {props.letter}
       <audio className="clip" id={props.letter} src={props.path} preload="auto" />
     </button>
